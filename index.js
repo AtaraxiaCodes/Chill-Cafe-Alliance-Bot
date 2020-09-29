@@ -7,7 +7,15 @@ const {
 } = require('./config.json');
 
 //Dependencies
-const fs = require('fs');
+const fs = require('fs'),
+	app = require("express")();
+
+// KeepAlive
+app.get("/", (req, res) => {
+	res.end();
+})
+
+app.listen(8080);
 
 //Client
 const client = new Discord.Client();
@@ -97,7 +105,7 @@ client.on('message', message => {
 //Bot Status
 client.on('ready', () => {
 	setInterval(() => {
-		const alliance_list = [alliance1, alliance2]; //Alliances
+		const alliance_list = [alliance1]; //Alliances
 		const aIndex = Math.floor(Math.random() * alliance_list.length);
 
 		const activities_list = [
